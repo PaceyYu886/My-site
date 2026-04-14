@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南山資訊課整合平台</title>
+    <style>
+        /* 酷炫黑綠風格 */
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #55FF55;
+            text-shadow: 3px 3px #000;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #AAAAAA;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: #2d2d2d;
+            border: 2px solid #444;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #55FF55;
+            box-shadow: 0 6px 20px rgba(85, 255, 85, 0.2);
+        }
+
+        .title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .color-yellow { color: #FFFF55; }
+        .color-blue { color: #55FFFF; }
+        .color-pink { color: #FF55FF; }
+        .color-orange { color: #FFA500; }
+
+        .intro {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid #666;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #55FF55;
+            color: #000;
+            border-color: #000;
+        }
+
+        .sub-item {
+            background: #383838;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #55FF55;
+            border-radius: 4px;
+        }
+
+        .sub-title {
+            color: #55FFFF;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* 程式碼儲存區樣式 */
+        #codeEditor {
+            width: 100%;
+            height: 150px;
+            background-color: #1a1a1a;
+            color: #55FF55;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .history-item {
+            background: #444;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .history-date {
+            color: #FFFF55;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #222;
+            padding: 8px;
+        }
+
+        footer {
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>PaceyNotFound創作</h1>
+    <div class="subtitle">資訊課整合平台</div>
+
+    <div class="container">
+        
+        <div class="card">
+            <div class="title color-yellow">💻 C++ 平台</div>
+            <div class="intro">專為資訊課程設計的 C++ 練習系統。提升邏輯思維與解題能力的起點。</div>
+            <a href="http://103.226.213.97/login/index.php" target="_blank" class="btn">進入 C++ 平台</a>
+        </div>
+
+        <div class="card">
+            <div class="title color-yellow">🎯 ZeroJudge</div>
+            <div class="intro">全台最大的線上解題系統，適合挑戰各類演算法與程式題目。</div>
+            <a href="https://zerojudge.tw/" target="_blank" class="btn">前往 ZeroJudge</a>
+        </div>
+
+        <div class="card">
+            <div class="title color-yellow">⛏️ Minecraft 線上版</div>
+            <div class="intro">無需安裝龐大檔案，即開即玩的 Minecraft 體驗。</div>
+            
+            <div class="sub-item">
+                <span class="sub-title">Eaglercraft</span>
+                <div class="intro">經典 1.8.8 網頁版，支援多人連線與各類伺服器，是最流暢的瀏覽器遊玩方案。</div>
+                <a href="https://eaglercraft.com/" target="_blank" class="btn">開啟 Eaglercraft</a>
+            </div>
+
+            <div class="sub-item">
+                <span class="sub-title">Thunder Network</span>
+                <div class="intro">穩定的網頁連線網路，提供專屬的小遊戲與生存伺服器環境。</div>
+                <a href="https://thundernetwork.store/" target="_blank" class="btn">進入 Thunder Network</a>
+            </div>
+
+            <div class="sub-item">
+                <span class="sub-title">Yee Launcher</span>
+                <div class="intro">強大的網頁前端啟動器，介面精美且支援自定義設定與模組。</div>
+                <a href="https://yee.pages.dev" target="_blank" class="btn">前往 Yee Launcher</a>
+            </div>
+        </div>
+
+        <div class="card" style="border-color: #FF55FF;">
+            <div class="title color-pink">🎮 想玩一點小遊戲？</div>
+            <div class="intro">大推 <strong>Neal.fun</strong>！充滿創意的小遊戲網站，適合課間放鬆心情。</div>
+            <a href="https://neal.fun/" target="_blank" class="btn" style="border-color: #FF55FF;">進入 Neal.fun 探索</a>
+        </div>
+
+        <div class="card" style="border-color: #FFA500;">
+            <div class="title color-orange">😴 懶人看過來 - 程式碼暫存</div>
+            <div class="intro">在這裡貼上你的程式碼並點擊儲存，系統會幫你記錄日期，方便你分次存稿與修改。</div>
+            <textarea id="codeEditor" placeholder="在此貼上你的程式碼..."></textarea>
+            <button class="btn" onclick="saveCode()">儲存當前程式碼</button>
+            <button class="btn" style="background:#882222;" onclick="clearHistory()">清空所有紀錄</button>
+
+            <div id="historySection">
+                </div>
+        </div>
+
+    </div>
+
+    <footer>&copy; 2026 南山資訊課學習專用</footer>
+
+    <script>
+        // 頁面載入時讀取紀錄
+        window.onload = function() {
+            displayHistory();
+        };
+
+        // 儲存程式碼功能
+        function saveCode() {
+            const codeText = document.getElementById('codeEditor').value;
+            if (!codeText.trim()) {
+                alert("請先輸入程式碼！");
+                return;
+            }
+
+            const now = new Date();
+            const dateString = now.getFullYear() + "/" + (now.getMonth()+1) + "/" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
+            
+            const newRecord = {
+                date: dateString,
+                content: codeText
+            };
+
+            // 從 localStorage 取得現有資料
+            let history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
+            history.unshift(newRecord); // 新的排在前面
+            localStorage.setItem('myCodeHistory', JSON.stringify(history));
+
+            document.getElementById('codeEditor').value = ""; // 清空輸入框
+            displayHistory();
+            alert("儲存成功！");
+        }
+
+        // 顯示紀錄功能
+        function displayHistory() {
+            const history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
+            const container = document.getElementById('historySection');
+            container.innerHTML = "";
+
+            history.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "history-item";
+                div.innerHTML = `
+                    <span class="history-date">📅 存檔日期：${item.date}</span>
+                    <pre><code>${escapeHtml(item.content)}</code></pre>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // 清空紀錄
+        function clearHistory() {
+            if(confirm("確定要刪除所有存檔嗎？此動作無法復原！")) {
+                localStorage.removeItem('myCodeHistory');
+                displayHistory();
+            }
+        }
+
+        // 防止 HTML 標籤導致網頁跑版
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+
+</body>
+</html>
