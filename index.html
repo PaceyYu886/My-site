@@ -6,30 +6,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PaceyNotFound</title>
     <meta name="google-site-verification" content="ML854rbdyvGZFnt2Vu98QeAKkafhBACxIYNxkw9iskc" />
+    <link id="hljsTheme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script>
+        // 提早套用主題，避免切換到淺色模式時畫面閃爍
+        (function () {
+            try {
+                if (localStorage.getItem('siteTheme') === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <style>
-        /* 酷炫黑綠風格 */
+        /* 酷炫黑綠風格（可切換淺色模式） */
+        :root {
+            --bg: #1a1a1a;
+            --text: #e0e0e0;
+            --h1-color: #55FF55;
+            --subtitle-color: #AAAAAA;
+            --card-bg: #2d2d2d;
+            --card-border: #444;
+            --intro-color: #ccc;
+            --btn-bg: #444;
+            --btn-color: #fff;
+            --btn-border: #666;
+            --btn-hover-bg: #55FF55;
+            --btn-hover-color: #000;
+            --sub-item-bg: #383838;
+            --code-bg: #1a1a1a;
+            --code-color: #55FF55;
+            --code-border: #555;
+            --history-bg: #444;
+            --footer-color: #666;
+            --pre-bg: #222;
+            --input-bg: #2d2d2d;
+            --input-border: #555;
+            --accent-yellow: #FFFF55;
+            --accent-blue: #55FFFF;
+            --accent-pink: #FF55FF;
+            --accent-orange: #FFA500;
+        }
+
+        :root[data-theme="light"] {
+            --bg: #f5f5f5;
+            --text: #222222;
+            --h1-color: #1a7a1a;
+            --subtitle-color: #555555;
+            --card-bg: #ffffff;
+            --card-border: #dddddd;
+            --intro-color: #444444;
+            --btn-bg: #e0e0e0;
+            --btn-color: #222222;
+            --btn-border: #bbbbbb;
+            --btn-hover-bg: #1a7a1a;
+            --btn-hover-color: #ffffff;
+            --sub-item-bg: #f0f0f0;
+            --code-bg: #ffffff;
+            --code-color: #1a7a1a;
+            --code-border: #cccccc;
+            --history-bg: #eeeeee;
+            --footer-color: #888888;
+            --pre-bg: #f0f0f0;
+            --input-bg: #ffffff;
+            --input-border: #cccccc;
+            --accent-yellow: #8a6d00;
+            --accent-blue: #007a7a;
+            --accent-pink: #b8009e;
+            --accent-orange: #b35900;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            background-color: var(--bg);
+            color: var(--text);
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 40px 20px;
             margin: 0;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
+            border: 1px solid var(--btn-border);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--btn-hover-bg);
+            color: var(--btn-hover-color);
         }
 
         h1 {
-            color: #55FF55;
+            color: var(--h1-color);
             text-shadow: 3px 3px #000;
             text-align: center;
             margin-bottom: 10px;
         }
 
         .subtitle {
-            color: #AAAAAA;
-            margin-bottom: 40px;
+            color: var(--subtitle-color);
+            margin-bottom: 25px;
             font-size: 1.2em;
+        }
+
+        .search-wrap {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 25px;
+        }
+
+        #linkSearch {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1em;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text);
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--subtitle-color);
+            padding: 20px;
+            display: none;
         }
 
         .container {
@@ -38,8 +150,8 @@
         }
 
         .card {
-            background-color: #2d2d2d;
-            border: 2px solid #444;
+            background-color: var(--card-bg);
+            border: 2px solid var(--card-border);
             padding: 25px;
             margin-bottom: 25px;
             border-radius: 12px;
@@ -49,7 +161,7 @@
 
         .card:hover {
             transform: translateY(-5px);
-            border-color: #55FF55;
+            border-color: var(--h1-color);
             box-shadow: 0 6px 20px rgba(85, 255, 85, 0.2);
         }
 
@@ -61,46 +173,62 @@
             align-items: center;
         }
 
-        .color-yellow { color: #FFFF55; }
-        .color-blue { color: #55FFFF; }
-        .color-pink { color: #FF55FF; }
-        .color-orange { color: #FFA500; }
+        .color-yellow { color: var(--accent-yellow); }
+        .color-blue { color: var(--accent-blue); }
+        .color-pink { color: var(--accent-pink); }
+        .color-orange { color: var(--accent-orange); }
 
         .intro {
             line-height: 1.6;
-            color: #ccc;
+            color: var(--intro-color);
             margin-bottom: 20px;
         }
 
         .btn {
             display: inline-block;
-            background-color: #444;
-            color: white;
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
             text-decoration: none;
             padding: 12px 25px;
             border-radius: 6px;
             font-weight: bold;
-            border: 1px solid #666;
+            border: 1px solid var(--btn-border);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .btn:hover {
-            background-color: #55FF55;
-            color: #000;
-            border-color: #000;
+            background-color: var(--btn-hover-bg);
+            color: var(--btn-hover-color);
+            border-color: var(--btn-hover-bg);
+        }
+
+        .btn.btn-small {
+            padding: 6px 14px;
+            font-size: 0.85em;
+        }
+
+        .btn.btn-danger {
+            background-color: #882222;
+            border-color: #a33;
+            color: #fff;
+        }
+
+        .btn.btn-danger:hover {
+            background-color: #cc3333;
+            color: #fff;
         }
 
         .sub-item {
-            background: #383838;
+            background: var(--sub-item-bg);
             padding: 15px;
             margin-top: 15px;
-            border-left: 4px solid #55FF55;
+            border-left: 4px solid var(--h1-color);
             border-radius: 4px;
         }
 
         .sub-title {
-            color: #55FFFF;
+            color: var(--accent-blue);
             font-weight: bold;
             margin-bottom: 8px;
             display: block;
@@ -110,9 +238,9 @@
         #codeEditor {
             width: 100%;
             height: 150px;
-            background-color: #1a1a1a;
-            color: #55FF55;
-            border: 1px solid #555;
+            background-color: var(--code-bg);
+            color: var(--code-color);
+            border: 1px solid var(--code-border);
             border-radius: 4px;
             padding: 10px;
             font-family: monospace;
@@ -121,65 +249,85 @@
         }
 
         .history-item {
-            background: #444;
+            background: var(--history-bg);
             padding: 10px;
             margin-top: 10px;
             border-radius: 4px;
             font-size: 0.9em;
         }
 
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
         .history-date {
-            color: #FFFF55;
+            color: var(--accent-yellow);
             font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 8px;
         }
 
         pre {
             white-space: pre-wrap;
             word-wrap: break-word;
-            background: #222;
+            background: var(--pre-bg);
             padding: 8px;
+            border-radius: 4px;
+            margin: 0;
         }
 
         footer {
             margin-top: 50px;
-            color: #666;
+            color: var(--footer-color);
             font-size: 0.9em;
         }
     </style>
 </head>
 <body>
 
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button>
+
     <h1>PaceyNotFound</h1>
     <div class="subtitle">資訊課整合平台</div>
 
+    <div class="search-wrap">
+        <input type="text" id="linkSearch" placeholder="🔍 搜尋連結（例如：ZeroJudge、Minecraft...）" oninput="filterLinks()">
+    </div>
+
     <div class="container">
 
-        <div class="card">
+        <div class="card link-card">
             <div class="title color-yellow">PaceyNotFound的介紹</div>
             <div class="intro">PaceyNotFound是一個台灣國中程式開發者，具有優秀的程式邏輯能力。
                               本網站提供資訊課會需要用到的各種連結，希望能滿足大家的需求。
                               以下是PaceyNotFound的Github連結。</div>
             <a href="https://github.com/PaceyYu886" target="_blank" class="btn">進入 Github</a>
         </div>
-        
-        <div class="card">
+
+        <div class="card link-card">
             <div class="title color-yellow">💻 C++ 平台</div>
             <div class="intro">專為資訊課程設計的 C++ 練習系統。提升邏輯思維與解題能力的起點。</div>
             <a href="http://103.226.213.97/login/index.php" target="_blank" class="btn">進入 C++ 平台</a>
         </div>
 
-        <div class="card">
+        <div class="card link-card">
             <div class="title color-yellow">🎯 ZeroJudge</div>
             <div class="intro">全台最大的線上解題系統，適合挑戰各類演算法與程式題目。</div>
             <a href="https://zerojudge.tw/" target="_blank" class="btn">前往 ZeroJudge</a>
         </div>
 
-        <div class="card">
+        <div class="card link-card">
             <div class="title color-yellow">⛏️ Minecraft 線上版</div>
             <div class="intro">無需安裝龐大檔案，即開即玩的 Minecraft 體驗。</div>
-            
+
             <div class="sub-item">
                 <span class="sub-title">Eaglercraft</span>
                 <div class="intro">經典 1.8.8 網頁版，支援多人連線與各類伺服器，是最流暢的瀏覽器遊玩方案。</div>
@@ -199,18 +347,20 @@
             </div>
         </div>
 
-        <div class="card" style="border-color: #FF55FF;">
+        <div class="card link-card" style="border-color: var(--accent-pink);">
             <div class="title color-pink">🎮 想玩一點小遊戲？</div>
             <div class="intro">大推 <strong>Neal.fun</strong>！充滿創意的小遊戲網站，適合課間放鬆心情。</div>
-            <a href="https://neal.fun/" target="_blank" class="btn" style="border-color: #FF55FF;">進入 Neal.fun 探索</a>
+            <a href="https://neal.fun/" target="_blank" class="btn" style="border-color: var(--accent-pink);">進入 Neal.fun 探索</a>
         </div>
 
-        <div class="card" style="border-color: #FFA500;">
+        <div class="no-results" id="noResults">找不到符合的連結 🔎</div>
+
+        <div class="card" style="border-color: var(--accent-orange);">
             <div class="title color-orange">😴 懶人看過來 - 程式碼暫存</div>
             <div class="intro">在這裡貼上你的程式碼並點擊儲存，系統會幫你記錄日期，方便你分次存稿與修改。</div>
             <textarea id="codeEditor" placeholder="在此貼上你的程式碼..."></textarea>
             <button class="btn" onclick="saveCode()">儲存當前程式碼</button>
-            <button class="btn" style="background:#882222;" onclick="clearHistory()">清空所有紀錄</button>
+            <button class="btn btn-danger" onclick="clearHistory()">清空所有紀錄</button>
 
             <div id="historySection">
                 </div>
@@ -220,13 +370,56 @@
 
     <footer>&copy; 2026 南山資訊課學習專用</footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
-        // 頁面載入時讀取紀錄
-        window.onload = function() {
+        // 頁面載入時讀取紀錄與主題
+        window.onload = function () {
+            applyThemeUI();
             displayHistory();
         };
 
-        // 儲存程式碼功能
+        // ---------- 主題切換 ----------
+        function isLightTheme() {
+            return document.documentElement.getAttribute('data-theme') === 'light';
+        }
+
+        function applyThemeUI() {
+            const light = isLightTheme();
+            document.getElementById('themeToggle').textContent = light ? '☀️ 淺色模式' : '🌙 深色模式';
+            document.getElementById('hljsTheme').href = light
+                ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css'
+                : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+        }
+
+        function toggleTheme() {
+            const light = isLightTheme();
+            if (light) {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+            try {
+                localStorage.setItem('siteTheme', light ? 'dark' : 'light');
+            } catch (e) {}
+            applyThemeUI();
+        }
+
+        // ---------- 連結搜尋 ----------
+        function filterLinks() {
+            const query = document.getElementById('linkSearch').value.trim().toLowerCase();
+            const cards = document.querySelectorAll('.link-card');
+            let anyVisible = false;
+
+            cards.forEach(card => {
+                const matches = !query || card.textContent.toLowerCase().includes(query);
+                card.style.display = matches ? '' : 'none';
+                if (matches) anyVisible = true;
+            });
+
+            document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
+        }
+
+        // ---------- 程式碼暫存 ----------
         function saveCode() {
             const codeText = document.getElementById('codeEditor').value;
             if (!codeText.trim()) {
@@ -236,42 +429,69 @@
 
             const now = new Date();
             const dateString = now.getFullYear() + "/" + (now.getMonth()+1) + "/" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes();
-            
+
             const newRecord = {
+                id: Date.now() + "-" + Math.random().toString(36).slice(2, 8),
                 date: dateString,
                 content: codeText
             };
 
-            // 從 localStorage 取得現有資料
-            let history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
+            const history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
             history.unshift(newRecord); // 新的排在前面
             localStorage.setItem('myCodeHistory', JSON.stringify(history));
 
             document.getElementById('codeEditor').value = ""; // 清空輸入框
             displayHistory();
-            alert("儲存成功！");
         }
 
-        // 顯示紀錄功能
         function displayHistory() {
             const history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
             const container = document.getElementById('historySection');
             container.innerHTML = "";
 
-            history.forEach((item, index) => {
+            history.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = "history-item";
                 div.innerHTML = `
-                    <span class="history-date">📅 存檔日期：${item.date}</span>
-                    <pre><code>${escapeHtml(item.content)}</code></pre>
+                    <div class="history-header">
+                        <span class="history-date">📅 存檔日期：${escapeHtml(item.date)}</span>
+                        <div class="history-actions">
+                            <button class="btn btn-small" onclick="copyEntry('${item.id}')">📋 複製</button>
+                            <button class="btn btn-small btn-danger" onclick="deleteEntry('${item.id}')">🗑 刪除</button>
+                        </div>
+                    </div>
+                    <pre><code class="hljs">${escapeHtml(item.content)}</code></pre>
                 `;
                 container.appendChild(div);
             });
+
+            if (window.hljs) {
+                container.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+            }
         }
 
-        // 清空紀錄
+        function copyEntry(id) {
+            const history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
+            const record = history.find(item => item.id === id);
+            if (!record) return;
+
+            navigator.clipboard.writeText(record.content).then(() => {
+                alert("已複製到剪貼簿！");
+            }).catch(() => {
+                alert("複製失敗，請手動選取複製。");
+            });
+        }
+
+        function deleteEntry(id) {
+            if (!confirm("確定要刪除這筆存檔嗎？")) return;
+            let history = JSON.parse(localStorage.getItem('myCodeHistory')) || [];
+            history = history.filter(item => item.id !== id);
+            localStorage.setItem('myCodeHistory', JSON.stringify(history));
+            displayHistory();
+        }
+
         function clearHistory() {
-            if(confirm("確定要刪除所有存檔嗎？此動作無法復原！")) {
+            if (confirm("確定要刪除所有存檔嗎？此動作無法復原！")) {
                 localStorage.removeItem('myCodeHistory');
                 displayHistory();
             }
